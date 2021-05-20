@@ -1,4 +1,4 @@
-d3.csv("/s/movies.csv").then(function (data, event) {
+d3.csv("https://github.com/TasniaHussain/MPP/blob/24274e21371f80a392eacce65a3d46e725c04c8e/movies.csv").then(function (data, event) {
 var movies = data;
 var button = d3.select("#button");
 var form = d3.select("#form");
