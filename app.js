@@ -7,6 +7,27 @@ form.on("submit", runEnter);
 
 console.log(movies);
 
+// Get datalist object
+var names_list = d3.select("#names_list");
+var names;
+var current_name;
+var name_element;
+
+// Loop through all the values in 'movies'
+for (var movies_index = 0; movies_index < movies.length; movies_index++){
+
+    names = movies[movies_index].actors.split(",");
+
+    // Loop through all the names in 'movies'
+    for (var names_index = 0; names_index < names.length; names_index++){
+
+        current_name = names[names_index];
+
+        // Add each name to the list
+        names_list.insert("option").attr("value", current_name);
+    }
+}
+
 // Defining the function
 function runEnter() {
 
