@@ -20,8 +20,8 @@ var inputValue = d3.select("#user-input").property("value");
 
 // This code will filter the movies looking at the actors column. It will store the values when there is a match from the text sequence the user entered and the text from our actors column from the CSV data.
 var filteredMovies = 
-movies.filter(movies => movies.actors.toLowerCase().includes(inputValue.toLowerCase()));
-
+movies.filter(movies => movies.actors.toLowerCase().split(',').includes(inputValue.toLowerCase()));
+console.log(filteredMovies);
 // This was the easiest approach I found to sort the results by a different column in descending order. I had to include a new script in my head to use the _.sortBy 
 //This is the script:  
 //<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
