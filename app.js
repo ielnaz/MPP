@@ -35,16 +35,14 @@ if (output.length === 0) {
 for (var i = 0; i < filteredMovies.length; i++) { //outer
     if ((output[i]['Type']) === "Red") {//first
         d3.select("tbody").insert("tr").html( 
-            "<td>" + [i+1] + "</td>"+
-        '<td style="color:white; background-color: darkred; font-size: 14pt; font-weight: bold">' + (output[i]['original_title'])+"</td>" + 
-        '<td> <a href="' + (output[i]['Source']) + '">' + 
-(output[i]['Source']) +"</a>");
+            "<td>" + [i+1] + "</td>" +
+            '<td style="color:white; background-color: darkred; font-size: 14pt; font-weight: bold"> <a href="' + (output[i]['Source']) + '">' + "<u>" + (output[i]['original_title'])+ "</u> </a>");
     }//first end
     else {//second
         d3.select("tbody").insert("tr").html( 
         "<td>" + [i+1] + "</td>"+
         '<td style="color:white; background-color: green; font-size: 14pt; font-weight: bold">' + (output[i]['original_title'])+"</td>" + 
-        '<td> <a href="' + (output[i]['Source']) + '">' + 
+        '<td > <a href="' + (output[i]['Source']) + '">' + 
 (output[i]['Source']) +"</a>");  
 
 
