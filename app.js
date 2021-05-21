@@ -1,4 +1,4 @@
-d3.csv("https://github.com/TasniaHussain/MPP/blob/24274e21371f80a392eacce65a3d46e725c04c8e/movies.csv").then(function (data, event) {
+d3.csv("https://raw.githubusercontent.com/TasniaHussain/MPP/24274e21371f80a392eacce65a3d46e725c04c8e/movies.csv").then(function (data, event) {
 var movies = data;
 var button = d3.select("#button");
 var form = d3.select("#form");
@@ -19,27 +19,34 @@ var inputValue = d3.select("#user-input").property("value");
 
 // This code will filter the movies looking at the actors column. It will store the values when there is a match from the text sequence the user entered and the text from our actors column from the CSV data.
 var filteredMovies = 
-movies.filter(movies => movies.actors.includes(inputValue));
+movies.filter(movies => movies.actors.toLowerCase().includes(inputValue.toLowerCase()));
 
 // This was the easiest approach I found to sort the results by a different column in descending order. I had to include a new script in my head to use the _.sortBy 
 //This is the script:  
 //<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
 var output = _.sortBy(filteredMovies, 'avg_vote').reverse();
+if (output.length === 0) {
+    d3.select("tbody").insert("tr").html( 
+        `<td colspan=3> We currently don't have information on this MP. Email us at <a href="mailto:info@emailsforpalestine.ca">info@emailsforpalestine.ca</a> so we can update their record. </td>` );
+}
+
 // Once I had all the values in my output variable, all I needed was to loop through them and add them to the table one by one. This was done using d3, where I inserted the value for each one of the columns I wanted using the necessary html to fit each table row.
 for (var i = 0; i < filteredMovies.length; i++) { //outer
     if ((output[i]['Type']) === "Red") {//first
         d3.select("tbody").insert("tr").html( 
-        "<td>" + [i+1] + "</td>" +
-        '<td style="color:red;">' + (output[i]['original_title'])+"</td>" + 
+        
+        '<td style="color:white; background-color: darkred; font-size: 14pt; font-weight: bold">' + (output[i]['original_title'])+"</td>" + 
         '<td> <a href="' + (output[i]['Source']) + '">' + 
 (output[i]['Source']) +"</a>");
     }//first end
     else {//second
         d3.select("tbody").insert("tr").html( 
-        "<td>" + [i+1] + "</td>" +
-        '<td style="color:green;">' + (output[i]['original_title'])+"</td>" + 
+        
+        '<td style="color:white; background-color: green; font-size: 14pt; font-weight: bold">' + (output[i]['original_title'])+"</td>" + 
         '<td> <a href="' + (output[i]['Source']) + '">' + 
-(output[i]['Source']) +"</a>");   
+(output[i]['Source']) +"</a>");  
+
+
     //second end}
 }
 }
