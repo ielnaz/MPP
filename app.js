@@ -1,4 +1,5 @@
-d3.csv("https://raw.githubusercontent.com/TasniaHussain/MPP/24274e21371f80a392eacce65a3d46e725c04c8e/movies.csv").then(function (data, event) {
+d3.csv("https://raw.githubusercontent.com/TasniaHussain/MPP/main/movies.csv").then(function (data, event) {
+//d3.csv("movies.csv").then(function (data, event) {
 var movies = data;
 var button = d3.select("#button");
 var form = d3.select("#form");
@@ -58,16 +59,14 @@ if (output.length === 0) {
 for (var i = 0; i < filteredMovies.length; i++) { //outer
     if ((output[i]['Type']) === "Red") {//first
         d3.select("tbody").insert("tr").html( 
-        
-        '<td style="color:white; background-color: darkred; font-size: 14pt; font-weight: bold">' + (output[i]['original_title'])+"</td>" + 
-        '<td> <a href="' + (output[i]['Source']) + '">' + 
-(output[i]['Source']) +"</a>");
+            "<td>" + [i+1] + "</td>" +
+            '<td style="color:white; background-color: darkred; font-size: 14pt; font-weight: bold"> <a href="' + (output[i]['Source']) + '">' + "<u>" + (output[i]['original_title'])+ "</u> </a>");
     }//first end
     else {//second
         d3.select("tbody").insert("tr").html( 
-        
+        "<td>" + [i+1] + "</td>"+
         '<td style="color:white; background-color: green; font-size: 14pt; font-weight: bold">' + (output[i]['original_title'])+"</td>" + 
-        '<td> <a href="' + (output[i]['Source']) + '">' + 
+        '<td > <a href="' + (output[i]['Source']) + '">' + 
 (output[i]['Source']) +"</a>");  
 
 
