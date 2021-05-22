@@ -6,6 +6,28 @@ var form = d3.select("#form");
 button.on("click", runEnter);
 form.on("submit", runEnter);
 
+console.log(movies);
+
+// Adding names to autofill-list
+var names_list = d3.select("#names_list");
+var names;
+var current_name;
+
+// Loop through all the values in 'movies'
+for (var movies_index = 0; movies_index < movies.length; movies_index++){
+
+    names = movies[movies_index].actors.split(",");
+
+    // Loop through all the names in 'movies'
+    for (var names_index = 0; names_index < names.length; names_index++){
+
+        current_name = names[names_index];
+
+        // Add each name to the list
+        names_list.insert("option").attr("value", current_name);
+    }
+}
+
 // Defining the function
 function runEnter() {
 
@@ -22,6 +44,7 @@ var inputValue = d3.select("#user-input").property("value");
 var filteredMovies = 
 movies.filter(movies => movies.actors.toLowerCase().split(',').includes(inputValue.toLowerCase()));
 console.log(filteredMovies);
+
 // This was the easiest approach I found to sort the results by a different column in descending order. I had to include a new script in my head to use the _.sortBy 
 //This is the script:  
 //<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
