@@ -52,3 +52,24 @@ for (var i = 0; i < filteredMovies.length; i++) { //outer
 }
 }
 )
+
+function doThis(){
+    let find_mp = document.getElementById("find-mp");
+    let postalCode = find_mp.value;
+    console.log(`https://represent.opennorth.ca/postcodes/${postalCode}/`);
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", `https://represent.opennorth.ca/postcodes/${postalCode}/`, false);
+    xmlHttp.send();
+    let list = (JSON.parse(xmlHttp.responseText)).representatives_centroid;
+    for (i = 0; i < list.length; i++){
+        if (list[i].elected_office === "MP") {
+            let name = list[i].name;
+            let email = list[i].email;
+            let image = list[i].photo_url;
+            let party = list[i].party_name;
+            $("#your-mp").html(`<img src="${image}">
+            <p> Name: ${name}, E-mail: ${email}, Party: ${party} </p>`);  
+            break;
+        }
+    };
+  };
